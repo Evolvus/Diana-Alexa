@@ -60,7 +60,7 @@ var Handler = {
           var msg = date < 12 ? 'Good Morning' : date < 18 ? 'Good Afternoon' : 'Good Night';
 		  console.log('Logging event b' );
 		  console.log(this.event);
-		  
+
           console.log('Logging event a' );
 		  var asd = this;
 		  var auditdata = {channelName : 'Alexa', requestDate : new Date()} ;
@@ -75,21 +75,21 @@ var Handler = {
 			  var audid = task._id.toString();
 			  console.log(audid);
 			  console.log(asd.event);
-              
-		  
+
+
 		  asd.event.session.attributes = {auditid : audid , channelid : 'Alexa'};
  			var ans = asd;
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":ans.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":ans.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
-											  
-												
+
+
 									console.log('tryin to send the error back');
 									speechOutput = 'Error in http call';
 									ans.response.speak(speechOutput);
@@ -99,15 +99,15 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 ans.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   ans.response.speak(speechOutput);
                   ans.emit(':responseReady');
-												
+
 										  }
       });
 			  }
@@ -150,14 +150,14 @@ var Handler = {
 	    'transferRequest': function () {
       console.log('in transfer intent');
           var filledSlots = delegateSlotCollection.call(this);
-          
+
           var draccount = filledSlots.slots.draccount.value;
 		  var amount = filledSlots.slots.amount.value;
           var craccount = filledSlots.slots.craccount.value;
 		  console.log(draccount);
 			console.log(amount);
 			console.log(craccount);
-			
+
 			 var asd = this;
 		  var auditdata = {channelName : 'Alexa', requestDate : new Date()} ;
             var auditinfo = new audit(auditdata);
@@ -173,16 +173,16 @@ var Handler = {
 			  console.log(asd.event);
 
           			var ans = asd;
-					 
+
 			ans.event.session.attributes = {draccount : draccount , amount : amount, craccount : craccount, auditid : audid , channelid : 'Alexa'};
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":ans.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":ans.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -190,18 +190,18 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 ans.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   ans.response.speak(speechOutput);
                   ans.emit(':responseReady');
-												
+
 										  }
       });
-			
+
 			  }
 			  });
       //    this.emit(':tell','Hi ,I am DIANA, your chat assistant from ABC Bank, how may I help you today. I am here to help you on your Accounts services and other Banking information from ABC Bank. Please enter "facebook banking" to start conversation with me.!!');
@@ -224,17 +224,17 @@ var Handler = {
 			  console.log(asd.event);
 
           			var ans = asd;
-					 
+
 			ans.event.session.attributes = {auditid : audid , channelid : 'Alexa'};
-			
+
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":ans.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":ans.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -242,18 +242,18 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 ans.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   ans.response.speak(speechOutput);
                   ans.emit(':responseReady');
-												
+
 										  }
       });
-			
+
 			  }
 			  });
       //    this.emit(':tell','Hi ,I am DIANA, your chat assistant from ABC Bank, how may I help you today. I am here to help you on your Accounts services and other Banking information from ABC Bank. Please enter "facebook banking" to start conversation with me.!!');
@@ -270,7 +270,7 @@ var Handler = {
           this.response.shouldEndSession(false);
 		  this.response.speak(speechOutput);
           this.emit(':responseReady');
-			
+
 			}
 	},
 		'currentintent': function () {
@@ -284,7 +284,7 @@ var Handler = {
           this.response.shouldEndSession(false);
 		  this.response.speak(speechOutput);
           this.emit(':responseReady');
-			
+
 			}
 	},
 	'allaccountintent': function () {
@@ -292,7 +292,7 @@ var Handler = {
 	Your Balance in the ${globalamt.typeofacc1} account ${globalamt.accnum1} Is ${globalamt.accountcurrency1} ${globalamt.balofuser1}`;
           this.response.speak(speechOutput);
           this.emit(':responseReady');
-			
+
 	},
 //cust auth starts
 'genotp' : function()  {
@@ -323,20 +323,20 @@ var Handler = {
 			  var audid = task._id.toString();
 			  console.log(audid);
 			  console.log(asd.event);
-              
-		  
+
+
 		  asd.event.session.attributes.auditid = audid ;
 		  asd.event.session.attributes.channelid = 'Alexa';
 			var ans = asd;
-			
+
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":ans.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":ans.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -344,20 +344,20 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 ans.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   ans.response.speak(speechOutput);
                   ans.emit(':responseReady');
-												
+
 										  }
       });
 			  }
 			});
-			
+
 
 },
 'getotp' : function()  {
@@ -375,13 +375,13 @@ var Handler = {
 
 			var asd = this;
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":asd.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":asd.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -389,19 +389,19 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 this.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   this.response.speak(speechOutput);
                   this.emit(':responseReady');
-												
+
 										  }
       });
-												
-			
+
+
 
 },
 'GetBalIntentnew' : function()  {
@@ -419,13 +419,13 @@ var Handler = {
 
 			var asd = this;
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":asd.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":asd.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -433,19 +433,19 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 this.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   this.response.speak(speechOutput);
                   this.emit(':responseReady');
-												
+
 										  }
       });
-												
-			
+
+
 
 },
 'GetBalIntentnewS' : function()  {
@@ -463,13 +463,13 @@ var Handler = {
 
 			var asd = this;
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":asd.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":asd.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -477,19 +477,19 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 this.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   this.response.speak(speechOutput);
                   this.emit(':responseReady');
-												
+
 										  }
       });
-												
-			
+
+
 
 },
 'GetBalIntentnewC' : function()  {
@@ -507,13 +507,13 @@ var Handler = {
 
 			var asd = this;
 			  httprequest.post ({
-											  url: 'https://sleepy-eyrie-90425.herokuapp.com/handlealexaintents', form:{"input":asd.event}
+											  url: 'https://radiant-stream-55068.herokuapp.com/handlealexaintents', form:{"input":asd.event}
 										  }, (error, response, body)=> {
 											  console.log(`error:${error}`);
-											  console.log(response); 
+											  console.log(response);
 											  console.log(`response: ${response}`);
 											  console.log(`body:${body}`);
-											
+
 										  if (error){
 											 callback('Cant connect to as error occured',null);
 										  }else if (response.statusCode === 400){
@@ -521,19 +521,19 @@ var Handler = {
 										  }else if (response.statusCode===200){
 											  console.log('Enter seccess block')
 											 var msg = JSON.parse(body);
-											 
+
 												console.log(`${msg.callbackMessage}`);
-											 
+
 													 this.response.shouldEndSession(false);
-	
+
                   speechOutput = `${msg.callbackMessage}`;
                   this.response.speak(speechOutput);
                   this.emit(':responseReady');
-												
+
 										  }
       });
-												
-			
+
+
 
 }
 };
@@ -541,7 +541,7 @@ var Handler = {
 
 //cust auth ends
 
- 
+
 
   function delegateSlotCollection(){
   console.log("in delegateSlotCollection");
