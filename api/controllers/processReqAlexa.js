@@ -542,7 +542,6 @@ var Handler = {
 //cust auth ends
 
 
-
   function delegateSlotCollection(){
   console.log("in delegateSlotCollection");
   console.log("current dialogState: "+this.event.request.dialogState);
