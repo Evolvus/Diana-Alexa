@@ -15,7 +15,7 @@
     "alexa-sdk": "^1.0.25",
     "aws4": "^1.6.0",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "helmet": "^3.12.0",
     "mongoose": "^5.0.7",
     "random-item": "^1.0.0",
